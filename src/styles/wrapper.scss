@@ -1,0 +1,12 @@
+.main-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+
+.dataTable {
+  & > .chakra-text {
+    text-align: center;
+  }
+}
