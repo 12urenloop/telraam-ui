@@ -18,17 +18,33 @@ type BatonContextProps = basicContext<Baton>
 
 type TeamContextProps = basicContext<Team>
 
-type ModalTypes = 'baton' | 'team' | 'none'
-
-interface ModalContextProps {
-  isOpen: boolean;
-  /**
-   * Identifier of data we are editing in modal (Baton/Team)
-   */
-  id: number;
-  setOpen: (isOpen: boolean) => void;
-  setId: (id: number) => void;
-  type: ModalTypes,
-  setType: (type: ModalTypes) => void;
+interface ModalInput {
+  name: string;
+  value: string;
+  disabled?: boolean;
+  options?: {
+    value: string,
+    name: string,
+  }[];
 }
 
+interface ModalInfo {
+  title: string;
+  saveEndpoint: string;
+  inputs: ModalInput[]
+  onClose: (didSave: boolean) => void;
+}
+
+interface ModalContextProps{
+  isOpen: boolean;
+  /**
+   * Opens the modal on call
+   */
+  onOpen: () => void;
+  /**
+   * Closes the modal on call
+   */
+  onClose: () => void;
+  info: ModalInfo;
+  setInfo: (info:Partial<ModalInfo>) => void;
+}

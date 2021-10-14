@@ -1,12 +1,29 @@
 import React, {useContext, useEffect} from 'react'
 import {TeamContext} from "../context/teams.context";
-import {Button, Table, Tbody, Td, Text, Tfoot, Th, Thead, Tr} from "@chakra-ui/react";
+import {
+  Button,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Table,
+  Tbody,
+  Td,
+  Text,
+  Th,
+  Thead,
+  Tr
+} from "@chakra-ui/react";
 import {ModalContext} from "../context/modal.context";
+import {sortNumericId} from "../util";
+import {ChevronDownIcon} from "@chakra-ui/icons";
+import {BatonContext} from "../context/batons.context";
 
 export const Teams = () => {
   const teamContext = useContext(TeamContext);
-  const modalContext = useContext(ModalContext)
-  const fetchContext = async () => {
+  const modalContext = useContext(ModalContext);
+  const batonContext = useContext(BatonContext);
+  const fetchTeams = async () => {
     const rawResult: Response = await fetch('http://localhost:8080/team', {
       method: "GET",
       redirect: "follow"
@@ -15,15 +32,48 @@ export const Teams = () => {
       //Show error or something
     }
     const teams: Team[] = await rawResult.json();
-    teamContext.setList(teams.sort((a, b)=>a.id-b.id))
+    teamContext.setList(teams.sort(sortNumericId));
   }
   const openTeamModal = (id: number) => {
-    modalContext.setType('team')
-    modalContext.setId(id);
-    modalContext.setOpen(true);
+    const selectedTeal = teamContext.list.find(b => b.id === id);
+    if (!selectedTeal) return;
+    const _inputs: ModalInput[] = Object.entries(selectedTeal).map(([key, value]) => {
+      const input: ModalInput = {
+        name: key,
+        value: value ?? '',
+      }
+      if (key == "id") {
+        input.disabled = true;
+      }
+      if (key == "batonId") {
+        input.options = batonContext.list.map(b=>({
+          value: b.id,
+          name: b.name
+        }))
+      }
+      console.log(input)
+      return input
+    })
+    modalContext.setInfo({
+      inputs: _inputs,
+      title: 'Edit Team',
+      onClose: (_) => fetchTeams(),
+      saveEndpoint: `http://localhost:8080/team/${id}`
+    });
+    modalContext.onOpen();
+  }
+  const deleteTeam = async (id: number) => {
+    const rawResult: Response = await fetch(`http://localhost:8080/team/${id}`, {
+      method: "DELETE",
+      redirect: "follow"
+    })
+    if (!rawResult.ok) {
+      //Show error or something
+    }
+    await fetchTeams();
   }
   useEffect(() => {
-    fetchContext();
+    fetchTeams();
   }, [])
   return (
     <div className={"dataTable"}>
@@ -34,7 +84,9 @@ export const Teams = () => {
             <Th>Id</Th>
             <Th>Naam</Th>
             <Th>BatonId</Th>
-            <Th/>
+            <Th>
+              <Button colorScheme={"green"}>Add</Button>
+            </Th>
           </Tr>
         </Thead>
         {(teamContext?.list ?? []).map(t=>(
@@ -43,20 +95,24 @@ export const Teams = () => {
               <Td>{t.id}</Td>
               <Td>{t.name}</Td>
               <Td>{t.batonId ?? "Unassigned"}</Td>
-              <Td><Button colorScheme={"teal"} variant="solid" onClick={()=>openTeamModal(t.id)}>Edit</Button></Td>
+              <Td>
+                <Menu>
+                  <MenuButton as={Button} colorScheme={'teal'} rightIcon={<ChevronDownIcon />} >
+                    Edit
+                  </MenuButton>
+                  <MenuList>
+                    <MenuItem onClick={()=>openTeamModal(t.id)}>
+                      Edit
+                    </MenuItem>
+                    <MenuItem onClick={()=>deleteTeam(t.id)}>
+                      Delete
+                    </MenuItem>
+                  </MenuList>
+                </Menu>
+              </Td>
             </Tr>
           </Tbody>
         ))}
-        <Tfoot>
-          <Tr>
-            <Th>&nbsp;</Th>
-            <Th>&nbsp;</Th>
-            <Th>&nbsp;</Th>
-            <Th>
-              <Button colorScheme={"green"}>Add</Button>
-            </Th>
-          </Tr>
-        </Tfoot>
       </Table>
     </div>
   )

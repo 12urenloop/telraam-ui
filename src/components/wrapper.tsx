@@ -1,8 +1,7 @@
 import React from 'react'
-import {Batons} from "./batons";
-import {BatonModal} from "./batonModal";
+import {EditModal} from "./Modal";
+import {Batons} from "./Batons";
 import {Teams} from "./Teams";
-import {TeamModal} from "./teamModal";
 
 import '../styles/wrapper.scss'
 
@@ -10,7 +9,6 @@ export const Wrapper = () => (
   <div className="main-wrapper">
     <Batons />
     <Teams />
-    <BatonModal />
-    <TeamModal />
+    <EditModal />
   </div>
 )
