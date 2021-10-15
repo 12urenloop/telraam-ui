@@ -18,20 +18,21 @@ export const EditModal = () => {
 	const initialRef = React.useRef(null);
 	const finalRef = React.useRef(null);
 	const { onClose, isOpen, info, setInfo } = useContext(ModalContext);
-	const updateValue = (e: ChangeEvent<HTMLInputElement>) => {
+	const updateValue = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
 		const inputInfo = info.inputs.find(i => i.name === e.target.name);
 		if (!inputInfo) {
 			// TODO add some error msg or so
 			return;
 		}
 		inputInfo.value = e.target.value;
-		const _inputs: ModalInput[] = [...info.inputs.filter(i => i.name !== e.target.name), inputInfo];
+		const _inputs: ModalInput[] = [...info.inputs];
+		_inputs[_inputs.findIndex(i => i.name === e.target.name)] = inputInfo;
 		setInfo({ inputs: _inputs });
 	};
 	const pushUpdate = async () => {
-		const body: Record<string, string> = {};
+		const values: Record<string, string> = {};
 		info.inputs.forEach(i => {
-			body[i.name] = i.value;
+			values[i.name] = i.value;
 		});
 		const rawResult: Response = await fetch(info.saveEndpoint, {
 			method: 'PUT',
