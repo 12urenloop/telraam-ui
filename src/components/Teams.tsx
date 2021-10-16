@@ -2,9 +2,10 @@ import React, { useContext, useEffect } from 'react';
 import { TeamContext } from '../context/teams.context';
 import { Button, Menu, MenuButton, MenuItem, MenuList, Table, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react';
 import { ModalContext } from '../context/modal.context';
-import { sortNumericId } from '../util';
+import { addData, deleteData, fetchData, sortNumericId, updateData } from '../util';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import { BatonContext } from '../context/batons.context';
+import { TEAM_PLACEHOLDER } from '../constant';
 
 export const Teams = () => {
 	const teamContext = useContext(TeamContext);
@@ -18,8 +19,9 @@ export const Teams = () => {
 		if (!rawResult.ok) {
 			//Show error or something
 		}
-		const teams: Team[] = await rawResult.json();
-		teamContext.setList(teams.sort(sortNumericId));
+		const teams = await fetchData<Team[]>('team');
+		teams.sort(sortNumericId);
+		teamContext.setList(teams);
 	};
 	const openTeamModal = (id: number) => {
 		const selectedTeal = teamContext.list.find(b => b.id === id);
@@ -38,29 +40,43 @@ export const Teams = () => {
 					name: b.name,
 				}));
 			}
-			console.log(input);
 			return input;
 		});
 		modalContext.setInfo({
 			inputs: _inputs,
 			title: 'Edit Team',
 			onClose: _ => fetchTeams(),
-			saveEndpoint: `http://localhost:8080/team/${id}`,
+			onSave: async values => {
+				delete values.id;
+				await updateData(`team/${id}`, values);
+				await fetchTeams();
+			},
 		});
 		modalContext.onOpen();
 	};
 	const deleteTeam = async (id: number) => {
-		const rawResult: Response = await fetch(`http://localhost:8080/team/${id}`, {
-			method: 'DELETE',
-			redirect: 'follow',
-		});
-		if (!rawResult.ok) {
-			//Show error or something
-		}
+		await deleteData(`team/${id}`);
 		await fetchTeams();
 	};
+	const openAddTeamModal = () => {
+		// Implement select for batonid
+		const _inputs: ModalInput[] = Object.entries(TEAM_PLACEHOLDER).map(([key, value]) => ({
+			name: key,
+			value,
+		}));
+		modalContext.setInfo({
+			inputs: _inputs,
+			title: 'Add Team',
+			onClose: _ => fetchTeams(),
+			onSave: async values => {
+				await addData(`team`, values);
+				await fetchTeams();
+			},
+		});
+		modalContext.onOpen();
+	};
 	useEffect(() => {
-		fetchTeams();
+		fetchTeams().then();
 	}, []);
 	return (
 		<div className={'dataTable'}>
@@ -72,7 +88,9 @@ export const Teams = () => {
 						<Th>Naam</Th>
 						<Th>BatonId</Th>
 						<Th>
-							<Button colorScheme={'green'}>Add</Button>
+							<Button colorScheme={'green'} onClick={openAddTeamModal}>
+								Add
+							</Button>
 						</Th>
 					</Tr>
 				</Thead>

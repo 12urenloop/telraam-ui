@@ -34,13 +34,7 @@ export const EditModal = () => {
 		info.inputs.forEach(i => {
 			values[i.name] = i.value;
 		});
-		const rawResult: Response = await fetch(info.saveEndpoint, {
-			method: 'PUT',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(body),
-		});
-		const data = await rawResult.json();
-		info.onClose(data);
+		info.onSave(values);
 		onClose();
 	};
 	return (

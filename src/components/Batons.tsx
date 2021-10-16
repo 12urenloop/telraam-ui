@@ -3,21 +3,16 @@ import { BatonContext } from '../context/batons.context';
 import { Button, Menu, MenuButton, Table, Tbody, Td, Text, Th, Thead, Tr, MenuList, MenuItem } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import { ModalContext } from '../context/modal.context';
-import { sortNumericId } from '../util';
+import { addData, deleteData, fetchData, sortNumericId, updateData } from '../util';
+import { BATON_PLACEHOLDER } from '../constant';
 
 export const Batons = () => {
 	const batonContext = useContext(BatonContext);
 	const modalContext = useContext(ModalContext);
 	const fetchBatons = async () => {
-		const rawResult: Response = await fetch('http://localhost:8080/baton', {
-			method: 'GET',
-			redirect: 'follow',
-		});
-		if (!rawResult.ok) {
-			//Show error or something
-		}
-		const batons: Baton[] = await rawResult.json();
-		batonContext.setList(batons.sort(sortNumericId));
+		const batons = await fetchData<Baton[]>('baton');
+		batons.sort(sortNumericId);
+		batonContext.setList(batons);
 	};
 	const openBatonModal = (batonId: number) => {
 		const selectedBaton = batonContext.list.find(b => b.id === batonId);
@@ -36,19 +31,33 @@ export const Batons = () => {
 			inputs: _inputs,
 			title: 'Edit Baton',
 			onClose: _ => fetchBatons(),
-			saveEndpoint: `http://localhost:8080/baton/${batonId}`,
+			onSave: async values => {
+				await updateData(`baton/${batonId}`, values);
+				await fetchBatons();
+			},
 		});
 		modalContext.onOpen();
 	};
 	const deleteBaton = async (id: number) => {
-		const rawResult: Response = await fetch(`http://localhost:8080/baton/${id}`, {
-			method: 'DELETE',
-			redirect: 'follow',
-		});
-		if (!rawResult.ok) {
-			//Show error or something
-		}
+		await deleteData(`baton/${id}`);
 		await fetchBatons();
+	};
+	const openAddBatonModal = () => {
+		const _inputs: ModalInput[] = Object.entries(BATON_PLACEHOLDER).map(([key, value]) => ({
+			value,
+			name: key,
+		}));
+		modalContext.setInfo({
+			inputs: _inputs,
+			title: 'Add Baton',
+			onClose: _ => fetchBatons(),
+			onSave: async values => {
+				delete values.id;
+				await addData(`baton`, values);
+				await fetchBatons();
+			},
+		});
+		modalContext.onOpen();
 	};
 	useEffect(() => {
 		fetchBatons().then();
@@ -62,7 +71,9 @@ export const Batons = () => {
 						<Th>Id</Th>
 						<Th>Naam</Th>
 						<Th>
-							<Button colorScheme={'green'}>Add</Button>
+							<Button colorScheme={'green'} onClick={openAddBatonModal}>
+								Add
+							</Button>
 						</Th>
 					</Tr>
 				</Thead>

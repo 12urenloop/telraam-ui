@@ -30,7 +30,7 @@ interface ModalInput {
 
 interface ModalInfo {
   title: string;
-  saveEndpoint: string;
+  onSave: (values: Record<string, string>) => void;
   inputs: ModalInput[]
   onClose: (didSave: boolean) => void;
 }
