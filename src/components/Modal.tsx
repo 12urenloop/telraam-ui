@@ -11,17 +11,23 @@ import {
 	ModalHeader,
 	ModalOverlay,
 	Select,
+	useToast,
 } from '@chakra-ui/react';
 import { ModalContext } from '../context/modal.context';
 
 export const EditModal = () => {
 	const initialRef = React.useRef(null);
 	const finalRef = React.useRef(null);
+	const toast = useToast();
 	const { onClose, isOpen, info, setInfo } = useContext(ModalContext);
 	const updateValue = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
 		const inputInfo = info.inputs.find(i => i.name === e.target.name);
 		if (!inputInfo) {
-			// TODO add some error msg or so
+			toast({
+				title: 'Modal Input Error',
+				description: 'The edited input field was not found in the given fields, try reloading the page',
+				status: 'warning',
+			});
 			return;
 		}
 		inputInfo.value = e.target.value;
