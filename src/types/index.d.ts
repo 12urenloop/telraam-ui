@@ -1,3 +1,4 @@
+// region Data types
 interface Baton {
   id: number;
   name: string;
@@ -14,10 +15,38 @@ interface basicContext<T>{
   setList: (list: T[]) => void;
 }
 
-type BatonContextProps = basicContext<Baton>
+type BatonContextProps = basicContext<Baton>;
 
-type TeamContextProps = basicContext<Team>
+type TeamContextProps = basicContext<Team>;
+// endregion
 
+// region Component Types
+interface DataListProps {
+	title: string;
+	data: ({ id: number } & Record<string, any>)[];
+	selectElem?: {
+		key: string;
+		getter: () => DataListSelectEntry[];
+	}[];
+	placeholder: Object;
+	addEntry: (values: Record<string, string>) => void;
+	deleteEntry: (id: number) => void;
+	updateEntry: (id: number, values: Record<string, string>) => void;
+}
+
+interface DataListSelectEntry {
+	value: string;
+	name: string;
+}
+
+interface DataListDialog {
+	onConfirm: () => void;
+	title: string;
+	isOpen: boolean;
+	onClose: () => void;
+}
+
+// region Modal
 interface ModalInput {
   name: string;
   value: string;
@@ -48,3 +77,5 @@ interface ModalContextProps{
   info: ModalInfo;
   setInfo: (info:Partial<ModalInfo>) => void;
 }
+// endregion
+// endregion
