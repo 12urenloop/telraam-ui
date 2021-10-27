@@ -1,18 +1,18 @@
 // region Data types
 interface Baton {
-  id: number;
-  name: string;
+	id: number;
+	name: string;
 }
 
 interface Team {
-  id: number;
-  name: string;
-  batonId: number;
+	id: number;
+	name: string;
+	batonId: number;
 }
 
-interface basicContext<T>{
-  list: T[],
-  setList: (list: T[]) => void;
+interface basicContext<T> {
+	list: T[];
+	setList: (list: T[]) => void;
 }
 
 type BatonContextProps = basicContext<Baton>;
@@ -48,34 +48,34 @@ interface DataListDialog {
 
 // region Modal
 interface ModalInput {
-  name: string;
-  value: string;
-  disabled?: boolean;
-  options?: {
-    value: string,
-    name: string,
-  }[];
+	name: string;
+	value: string;
+	disabled?: boolean;
+	options?: {
+		value: string;
+		name: string;
+	}[];
 }
 
 interface ModalInfo {
-  title: string;
-  onSave: (values: Record<string, string>) => void;
-  inputs: ModalInput[]
-  onClose: (didSave: boolean) => void;
+	title: string;
+	onSave: (values: Record<string, string>) => void;
+	inputs: ModalInput[];
+	onClose: (didSave: boolean) => void;
 }
 
-interface ModalContextProps{
-  isOpen: boolean;
-  /**
-   * Opens the modal on call
-   */
-  onOpen: () => void;
-  /**
-   * Closes the modal on call
-   */
-  onClose: () => void;
-  info: ModalInfo;
-  setInfo: (info:Partial<ModalInfo>) => void;
+interface ModalContextProps {
+	isOpen: boolean;
+	/**
+	 * Opens the modal on call
+	 */
+	onOpen: () => void;
+	/**
+	 * Closes the modal on call
+	 */
+	onClose: () => void;
+	info: ModalInfo;
+	setInfo: (info: Partial<ModalInfo>) => void;
 }
 // endregion
 // endregion

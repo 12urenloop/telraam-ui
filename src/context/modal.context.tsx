@@ -13,8 +13,10 @@ export const ModalContext = createContext<ModalContextProps>({
 		onClose() {
 			return;
 		},
+		onSave() {
+			return;
+		},
 		inputs: [],
-		saveEndpoint: '',
 		title: '',
 	},
 	setInfo() {
@@ -29,7 +31,9 @@ export const ModalProvider: React.FC = ({ children }) => {
 		onClose() {
 			return;
 		},
-		saveEndpoint: '',
+		onSave() {
+			return;
+		},
 		title: '',
 	});
 	const setInfo = (newInfo: Partial<ModalInfo>) => {
