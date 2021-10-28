@@ -101,7 +101,7 @@ export const deleteData = async (endpoint: string): Promise<boolean> => {
 };
 
 export const updateData = async (endpoint: string, body: any): Promise<boolean> => {
-	const rawResult: Response = await fetch(`${TELRAAM_ENDPOINT}&/${endpoint}`, {
+	const rawResult: Response = await fetch(`${TELRAAM_ENDPOINT}/${endpoint}`, {
 		method: 'PUT',
 		headers: { 'Content-Type': 'application/json' },
 		redirect: 'follow',
