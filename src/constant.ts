@@ -1,5 +1,3 @@
-export const TELRAAM_ENDPOINT = 'http://localhost:8080';
-
 export const BATON_PLACEHOLDER: Baton = {
 	id: 0,
 	name: '',

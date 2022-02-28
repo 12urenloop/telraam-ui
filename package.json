@@ -9,7 +9,8 @@
 		"dev": "vite",
 		"build": "yarn format && tsc && vite build",
 		"serve": "yarn build && vite preview",
-		"format": "prettier .  --write"
+		"format": "prettier .  --write",
+		"lint": "eslint --ext js,jsx,ts,tsx --fix src/"
 	},
 	"dependencies": {
 		"@chakra-ui/icons": "^1.0.15",

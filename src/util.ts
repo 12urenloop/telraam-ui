@@ -1,5 +1,4 @@
 import { createStandaloneToast } from '@chakra-ui/react';
-import { TELRAAM_ENDPOINT } from './constant';
 
 const toast = createStandaloneToast();
 
@@ -31,7 +30,7 @@ export const parseData = (data: any, placeholder: any): any => {
 };
 
 export const fetchData = async <T>(endpoint: string): Promise<T> => {
-	const rawResult: Response = await fetch(`${TELRAAM_ENDPOINT}/${endpoint}`, {
+	const rawResult: Response = await fetch(`${VITE_TELRAAM_ENDPOINT}/${endpoint}`, {
 		method: 'GET',
 		headers: { 'Content-Type': 'application/json' },
 		redirect: 'follow',
@@ -54,7 +53,7 @@ export const fetchData = async <T>(endpoint: string): Promise<T> => {
 };
 
 export const addData = async (endpoint: string, values: any): Promise<any> => {
-	const rawResult: Response = await fetch(`${TELRAAM_ENDPOINT}/${endpoint}`, {
+	const rawResult: Response = await fetch(`${VITE_TELRAAM_ENDPOINT}/${endpoint}`, {
 		method: 'POST',
 		redirect: 'follow',
 		headers: { 'Content-Type': 'application/json' },
@@ -79,7 +78,7 @@ export const addData = async (endpoint: string, values: any): Promise<any> => {
 };
 
 export const deleteData = async (endpoint: string): Promise<boolean> => {
-	const rawResult: Response = await fetch(`${TELRAAM_ENDPOINT}/${endpoint}`, {
+	const rawResult: Response = await fetch(`${VITE_TELRAAM_ENDPOINT}/${endpoint}`, {
 		method: 'DELETE',
 		redirect: 'follow',
 	});
@@ -101,7 +100,7 @@ export const deleteData = async (endpoint: string): Promise<boolean> => {
 };
 
 export const updateData = async (endpoint: string, body: any): Promise<boolean> => {
-	const rawResult: Response = await fetch(`${TELRAAM_ENDPOINT}/${endpoint}`, {
+	const rawResult: Response = await fetch(`${VITE_TELRAAM_ENDPOINT}/${endpoint}`, {
 		method: 'PUT',
 		headers: { 'Content-Type': 'application/json' },
 		redirect: 'follow',

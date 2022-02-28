@@ -2,6 +2,7 @@
 dist
 dist-ssr
 *.local
+.env
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/react,jetbrains,visualstudiocode

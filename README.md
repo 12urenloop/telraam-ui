@@ -26,20 +26,19 @@ Install the npm package:
 With npm: `npm install`
 or with yarn: `yarn install`
 
-### Database
+### Enviroment
 
-If your telraam is not running on your local machine or you changed the port you should change `TELRAAM_ENDPOINT` in `src/constant.ts`
+To make the UI work, you should copy `.env.template` to `.env`.
+Otherwise, the UI will not be able to make requests to telraam
 
-eg:
-
-```typescript
-export const TELRAAM_ENDPOINT = 'http://my-super-secret-ip:1235';
-```
+To change the telraam endpoint, update the variable in the .env file
 
 ## Deploy
+
 To deploy this website you can use the built-in vite preview tool:
 `npm run serve` or `yarn server`
 
 ## Development
+
 To run a webserver with a filewatcher run:
 `npm run dev` or `yarn dev`
