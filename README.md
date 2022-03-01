@@ -42,3 +42,15 @@ To deploy this website you can use the built-in vite preview tool:
 
 To run a webserver with a filewatcher run:
 `npm run dev` or `yarn dev`
+
+## Screenshots
+
+### Main dashboard
+![main_page](https://i.imgur.com/NyIKA4X.png)
+### Filtered Dashboard
+You're able to disable certain list if you don't want to see them
+![filtered+page](https://i.imgur.com/pFcsiu5.png)
+### Add a new item
+![add_item](https://i.imgur.com/s3o7CHz.png)
+### Edit an item
+![edit_item](https://i.imgur.com/M1JvUxs.png)
