@@ -1,4 +1,4 @@
-export const BATON_PLACEHOLDER: Baton = {
+export const BATON_PLACEHOLDER: BaseEntry = {
 	id: 0,
 	name: '',
 };

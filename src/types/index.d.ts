@@ -1,12 +1,10 @@
 // region Data types
-interface Baton {
+interface BaseEntry {
 	id: number;
 	name: string;
 }
 
-interface Team {
-	id: number;
-	name: string;
+interface Team extends BaseEntry {
 	batonId: number;
 }
 
@@ -23,7 +21,7 @@ type TeamContextProps = basicContext<Team>;
 // region Component Types
 interface DataListProps {
 	title: string;
-	data: ({ id: number } & Record<string, any>)[];
+	data: BaseEntry[];
 	selectElem?: {
 		key: string;
 		getter: () => DataListSelectEntry[];

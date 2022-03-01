@@ -7,7 +7,7 @@ import { BATON_PLACEHOLDER } from '../constant';
 export const Batons = () => {
 	const batonContext = useContext(BatonContext);
 	const fetchBatons = async () => {
-		const batons = await fetchData<Baton[]>('baton');
+		const batons = await fetchData<BaseEntry[]>('baton');
 		batons.sort(sortNumericId);
 		batonContext.setList(batons);
 	};
