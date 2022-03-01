@@ -72,7 +72,7 @@ export const DataList = (props: DataListProps) => {
 		});
 		modalContext.setInfo({
 			inputs: _inputs,
-			title: `Add new ${props.title}`,
+			title: `Add new ${props.title.replace(/s$/, '')}`,
 			onSave: values => props.addEntry(values),
 			onClose: () => null,
 		});
@@ -104,7 +104,7 @@ export const DataList = (props: DataListProps) => {
 		});
 		modalContext.setInfo({
 			inputs: _inputs,
-			title: `Edit ${props.title}`,
+			title: `Edit ${props.title.replace(/s$/, '')}`,
 			onSave: values => props.updateEntry(id, values),
 			onClose: () => null,
 		});
