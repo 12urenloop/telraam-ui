@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react';
-import { BatonContext } from '../context/batons.context';
-import { addData, deleteData, fetchData, parseData, sortNumericId, updateData } from '../util';
-import { DataList } from './List';
-import { BATON_PLACEHOLDER } from '../constant';
+import { BatonContext } from '../../context/batons.context';
+import { addData, deleteData, fetchData, parseData, sortNumericId, updateData } from '../../util';
+import { DataList } from '../List';
+import { BATON_PLACEHOLDER } from '../../constant';
 
 export const Batons = () => {
 	const batonContext = useContext(BatonContext);

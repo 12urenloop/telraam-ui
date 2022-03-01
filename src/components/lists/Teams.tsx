@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from 'react';
-import { DataList } from './List';
-import { addData, deleteData, fetchData, parseData, sortNumericId, updateData } from '../util';
-import { TEAM_PLACEHOLDER } from '../constant';
-import { BatonContext } from '../context/batons.context';
-import { TeamContext } from '../context/teams.context';
+import { DataList } from '../List';
+import { addData, deleteData, fetchData, parseData, sortNumericId, updateData } from '../../util';
+import { TEAM_PLACEHOLDER } from '../../constant';
+import { BatonContext } from '../../context/batons.context';
+import { TeamContext } from '../../context/teams.context';
 
 export const Teams = () => {
 	const teamsContext = useContext(TeamContext);

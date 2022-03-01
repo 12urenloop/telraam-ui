@@ -1,8 +1,8 @@
 import React, { FC, useContext, useEffect } from 'react';
-import { addData, deleteData, fetchData, parseData, sortNumericId, updateData } from '../util';
-import { STATION_PLACEHOLDER } from '../constant';
-import { DataList } from './List';
-import { StationContext } from '../context/stations.context';
+import { addData, deleteData, fetchData, parseData, sortNumericId, updateData } from '../../util';
+import { STATION_PLACEHOLDER } from '../../constant';
+import { DataList } from '../List';
+import { StationContext } from '../../context/stations.context';
 
 export const Stations: FC = () => {
 	const stationCtx = useContext(StationContext);

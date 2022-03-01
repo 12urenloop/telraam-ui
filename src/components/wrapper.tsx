@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { EditModal } from './Modal';
-import { Batons } from './Batons';
-import { Teams } from './Teams';
+import { Batons } from './lists/Batons';
+import { Teams } from './lists/Teams';
+import { Stations } from './lists/Stations';
 import { Alert, AlertDescription, AlertIcon } from '@chakra-ui/react';
 
 import '../styles/wrapper.scss';
-import { Stations } from './Stations';
 
 export const Wrapper = () => {
 	const [isEndpointSet, SetIsEndpointSet] = useState(false);
