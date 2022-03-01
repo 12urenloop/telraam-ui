@@ -139,7 +139,7 @@ export const DataList = (props: DataListProps) => {
 							</Th>
 						</Tr>
 					</Thead>
-					{props.data[0] === undefined && <TableCaption>No data fam</TableCaption>}
+					{props.data[0] === undefined && <TableCaption>There was no data found</TableCaption>}
 					<Tbody>
 						{props.data.map((d, i) => (
 							<Tr key={`${i}-${d.id}`}>
