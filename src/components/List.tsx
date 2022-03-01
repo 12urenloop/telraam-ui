@@ -20,6 +20,7 @@ import {
 	AlertDialogContent,
 	AlertDialogOverlay,
 	useToast,
+	TableCaption,
 } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 
@@ -127,7 +128,7 @@ export const DataList = (props: DataListProps) => {
 				<Thead>
 					<Tr>
 						{Object.keys(props.placeholder).map((k, i) => (
-							<Th key={i}>{k}</Th>
+							<Th key={`${props.title}-header-${k}`}>{k}</Th>
 						))}
 						<Th>
 							<Button colorScheme={'green'} onClick={openModalAdd}>
@@ -136,32 +137,27 @@ export const DataList = (props: DataListProps) => {
 						</Th>
 					</Tr>
 				</Thead>
-				{props.data[0] ? (
-					<Tbody>
-						{props.data.map((d, i) => (
-							<Tr key={i}>
-								{Object.values(d).map(v => (
-									<Td>{v}</Td>
-								))}
-								<Td>
-									<Menu>
-										<MenuButton as={Button} colorScheme={'teal'} rightIcon={<ChevronDownIcon />}>
-											Edit
-										</MenuButton>
-										<MenuList>
-											<MenuItem onClick={() => openModal(d.id)}>Edit</MenuItem>
-											<MenuItem onClick={() => deleteEntry(d.id)}>Delete</MenuItem>
-										</MenuList>
-									</Menu>
-								</Td>
-							</Tr>
-						))}
-					</Tbody>
-				) : (
-					<Tbody>
-						<p className={'center'}>no data fam</p>
-					</Tbody>
-				)}
+				{props.data[0] === undefined && <TableCaption>No data fam</TableCaption>}
+				<Tbody>
+					{props.data.map((d, i) => (
+						<Tr key={`${i}-${d.id}`}>
+							{(Object.keys(d) as (keyof BaseEntry)[]).map(dataKey => (
+								<Td key={`${props.title}-data-${dataKey}`}>{String(d[dataKey])}</Td>
+							))}
+							<Td>
+								<Menu>
+									<MenuButton as={Button} colorScheme={'teal'} rightIcon={<ChevronDownIcon />}>
+										Edit
+									</MenuButton>
+									<MenuList>
+										<MenuItem onClick={() => openModal(d.id)}>Edit</MenuItem>
+										<MenuItem onClick={() => deleteEntry(d.id)}>Delete</MenuItem>
+									</MenuList>
+								</Menu>
+							</Td>
+						</Tr>
+					))}
+				</Tbody>
 			</Table>
 		</div>
 	);
