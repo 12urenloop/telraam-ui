@@ -8,14 +8,19 @@ interface Team extends BaseEntry {
 	batonId: number;
 }
 
+interface Station extends BaseEntry {
+	isBroken: boolean;
+}
+
 interface basicContext<T> {
 	list: T[];
 	setList: (list: T[]) => void;
 }
 
-type BatonContextProps = basicContext<Baton>;
+type BaseEntryContextProps = basicContext<BaseEntry>;
 
 type TeamContextProps = basicContext<Team>;
+type StationContextProps = basicContext<Station>;
 // endregion
 
 // region Component Types

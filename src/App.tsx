@@ -6,6 +6,7 @@ import theme from './theme';
 import { ModalProvider } from './context/modal.context';
 import { BatonProvider } from './context/batons.context';
 import { TeamProvider } from './context/teams.context';
+import { StationProvider } from "./context/stations.context";
 
 function App() {
 	return (
@@ -13,7 +14,9 @@ function App() {
 			<ModalProvider>
 				<BatonProvider>
 					<TeamProvider>
-						<Wrapper />
+						<StationProvider>
+							<Wrapper />
+						</StationProvider>
 					</TeamProvider>
 				</BatonProvider>
 			</ModalProvider>

@@ -5,6 +5,7 @@ import { Teams } from './Teams';
 import { Alert, AlertDescription, AlertIcon } from '@chakra-ui/react';
 
 import '../styles/wrapper.scss';
+import { Stations } from './Stations';
 
 export const Wrapper = () => {
 	const [isEndpointSet, SetIsEndpointSet] = useState(false);
@@ -17,6 +18,7 @@ export const Wrapper = () => {
 				<>
 					<Batons />
 					<Teams />
+					<Stations />
 					<EditModal />
 				</>
 			) : (

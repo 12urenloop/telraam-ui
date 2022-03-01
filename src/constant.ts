@@ -8,3 +8,9 @@ export const TEAM_PLACEHOLDER: Team = {
 	name: '',
 	batonId: 0,
 };
+
+export const STATION_PLACEHOLDER: Station = {
+	id: 0,
+	name: '',
+	isBroken: false,
+};
