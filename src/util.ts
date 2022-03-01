@@ -21,6 +21,9 @@ export const parseData = (data: any, placeholder: any): any => {
 		});
 		return parsedData;
 	}
+	if (typeof placeholder == 'boolean') {
+		return Boolean(data);
+	}
 	if (typeof placeholder == 'string') {
 		return String(data);
 	}

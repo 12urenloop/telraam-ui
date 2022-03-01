@@ -31,14 +31,14 @@ interface DataListProps {
 		key: string;
 		getter: () => DataListSelectEntry[];
 	}[];
-	placeholder: Object;
+	placeholder: Record<string, any>;
 	addEntry: (values: Record<string, string>) => void;
 	deleteEntry: (id: number) => void;
 	updateEntry: (id: number, values: Record<string, string>) => void;
 }
 
 interface DataListSelectEntry {
-	value: string;
+	value: string | boolean;
 	name: string;
 }
 
@@ -52,12 +52,9 @@ interface DataListDialog {
 // region Modal
 interface ModalInput {
 	name: string;
-	value: string;
+	value: string | boolean;
 	disabled?: boolean;
-	options?: {
-		value: string;
-		name: string;
-	}[];
+	options?: DataListSelectEntry[];
 }
 
 interface ModalInfo {
@@ -80,13 +77,16 @@ interface ModalContextProps {
 	info: ModalInfo;
 	setInfo: (info: Partial<ModalInfo>) => void;
 }
+
 // endregion
 // endregion
 
 // region General Context
 type ModuleType = 'teams' | 'stations' | 'batons';
+
 interface GeneralContext {
 	enabledModules: Record<ModuleType, boolean>;
 	toggleModule: (module: ModuleType) => void;
 }
+
 // endregion

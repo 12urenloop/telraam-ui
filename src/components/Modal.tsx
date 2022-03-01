@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useContext } from 'react';
+import React, { ChangeEvent, FC, useContext } from 'react';
 import {
 	Button,
 	FormControl,
@@ -11,9 +11,21 @@ import {
 	ModalHeader,
 	ModalOverlay,
 	Select,
+	Switch,
 	useToast,
 } from '@chakra-ui/react';
 import { ModalContext } from '../context/modal.context';
+
+const InputWrap: FC<{
+	name: string;
+	value: number | string | boolean;
+	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+}> = ({ value, ...props }) => {
+	if (typeof value === 'boolean') {
+		return <Switch {...props} isChecked={value} />;
+	}
+	return <Input {...props} placeholder={props.name} value={value} />;
+};
 
 export const EditModal = () => {
 	const initialRef = React.useRef(null);
@@ -30,13 +42,13 @@ export const EditModal = () => {
 			});
 			return;
 		}
-		inputInfo.value = e.target.value;
+		inputInfo.value = e.target.type === 'checkbox' ? (e.target as any).checked : e.target.value;
 		const _inputs: ModalInput[] = [...info.inputs];
 		_inputs[_inputs.findIndex(i => i.name === e.target.name)] = inputInfo;
 		setInfo({ inputs: _inputs });
 	};
 	const pushUpdate = async () => {
-		const values: Record<string, string> = {};
+		const values: Record<string, any> = {};
 		info.inputs.forEach(i => {
 			values[i.name] = i.value;
 		});
@@ -62,19 +74,13 @@ export const EditModal = () => {
 						<FormControl key={i.name}>
 							<FormLabel>{i.name.charAt(0).toUpperCase() + i.name.substr(1)}</FormLabel>
 							{i.options ? (
-								<Select placeholder='Select batonId' name={i.name} value={i.value} onChange={updateValue}>
+								<Select placeholder={`Select ${i.name}`} name={i.name} value={String(i.value)} onChange={updateValue}>
 									{i.options.map(io => (
 										<option value={io.value}>{io.name}</option>
 									))}
 								</Select>
 							) : (
-								<Input
-									placeholder={i.name}
-									name={i.name}
-									value={i.value}
-									disabled={i.disabled}
-									onChange={updateValue}
-								/>
+								<InputWrap name={i.name} value={i.value} onChange={updateValue} />
 							)}
 						</FormControl>
 					))}

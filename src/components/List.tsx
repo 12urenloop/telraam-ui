@@ -66,7 +66,7 @@ export const DataList = (props: DataListProps) => {
 			}
 			_inputs.push({
 				name: k,
-				value: '',
+				value: props.placeholder[k as keyof typeof props.placeholder],
 				options: selectOpt,
 			});
 		});
@@ -97,7 +97,7 @@ export const DataList = (props: DataListProps) => {
 			}
 			_inputs.push({
 				name: k,
-				value: String(v),
+				value: v,
 				disabled: k == 'id',
 				options: selectOpt,
 			});
