@@ -82,3 +82,11 @@ interface ModalContextProps {
 }
 // endregion
 // endregion
+
+// region General Context
+type ModuleType = 'teams' | 'stations' | 'batons';
+interface GeneralContext {
+	enabledModules: Record<ModuleType, boolean>;
+	toggleModule: (module: ModuleType) => void;
+}
+// endregion

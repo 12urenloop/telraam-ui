@@ -5,17 +5,20 @@ import { ModalProvider } from '../context/modal.context';
 import { BatonProvider } from '../context/batons.context';
 import { TeamProvider } from '../context/teams.context';
 import { StationProvider } from '../context/stations.context';
+import { GeneralProvider } from "../context/general.context";
 
 export const AppProviders: FC = ({ children }) => {
 	return (
 		<ChakraProvider theme={theme}>
-			<ModalProvider>
-				<BatonProvider>
-					<TeamProvider>
-						<StationProvider>{children}</StationProvider>
-					</TeamProvider>
-				</BatonProvider>
-			</ModalProvider>
+			<GeneralProvider>
+				<ModalProvider>
+					<BatonProvider>
+						<TeamProvider>
+							<StationProvider>{children}</StationProvider>
+						</TeamProvider>
+					</BatonProvider>
+				</ModalProvider>
+			</GeneralProvider>
 		</ChakraProvider>
 	);
 };
