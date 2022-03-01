@@ -127,7 +127,7 @@ export const DataList = (props: DataListProps) => {
 			<Table variant={'simple'}>
 				<Thead>
 					<Tr>
-						{Object.keys(props.placeholder).map((k, i) => (
+						{Object.keys(props.placeholder).map(k => (
 							<Th key={`${props.title}-header-${k}`}>{k}</Th>
 						))}
 						<Th>
