@@ -21,6 +21,8 @@ type BaseEntryContextProps = basicContext<BaseEntry>;
 
 type TeamContextProps = basicContext<Team>;
 type StationContextProps = basicContext<Station>;
+
+type BaseEntrySortFunc = (a: BaseEntry, b: BaseEntry) => number;
 // endregion
 
 // region Component Types

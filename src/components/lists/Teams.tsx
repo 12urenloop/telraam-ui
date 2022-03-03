@@ -1,16 +1,17 @@
 import React, { useContext, useEffect } from 'react';
 import { DataList } from '../List';
-import { addData, deleteData, fetchData, parseData, sortNumericId, updateData } from '../../util';
+import { addData, deleteData, parseData, updateData } from '../../util';
 import { TEAM_PLACEHOLDER } from '../../constant';
 import { BatonContext } from '../../context/batons.context';
 import { TeamContext } from '../../context/teams.context';
+import { useFetchData } from '../../hooks/useFetchData';
 
 export const Teams = () => {
 	const teamsContext = useContext(TeamContext);
 	const batonContext = useContext(BatonContext);
+	const fetcher = useFetchData('teams');
 	const fetchTeams = async () => {
-		const teams = await fetchData<Team[]>('team');
-		teams.sort(sortNumericId);
+		const teams = await fetcher.fetch<Team[]>('team', true);
 		teamsContext.setList(teams);
 	};
 	const getBatons = () => {

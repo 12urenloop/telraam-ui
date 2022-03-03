@@ -1,14 +1,15 @@
 import React, { useContext, useEffect } from 'react';
 import { BatonContext } from '../../context/batons.context';
-import { addData, deleteData, fetchData, parseData, sortNumericId, updateData } from '../../util';
+import { addData, deleteData, parseData, updateData } from '../../util';
 import { DataList } from '../List';
 import { BATON_PLACEHOLDER } from '../../constant';
+import { useFetchData } from '../../hooks/useFetchData';
 
 export const Batons = () => {
 	const batonContext = useContext(BatonContext);
+	const fetcher = useFetchData('batons');
 	const fetchBatons = async () => {
-		const batons = await fetchData<BaseEntry[]>('baton');
-		batons.sort(sortNumericId);
+		const batons = await fetcher.fetch<BaseEntry[]>('baton', true);
 		batonContext.setList(batons);
 	};
 	const addBaton = async (values: Record<string, string>) => {
@@ -25,7 +26,9 @@ export const Batons = () => {
 	};
 
 	useEffect(() => {
-		fetchBatons().then();
+		fetchBatons();
+		const interval = setInterval(() => fetchBatons(), 1000);
+		return () => clearInterval(interval);
 	}, []);
 
 	return (
