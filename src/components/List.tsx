@@ -22,6 +22,8 @@ import {
 	useToast,
 	TableCaption,
 	WrapItem,
+	Spinner,
+	Center,
 } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 
@@ -116,7 +118,7 @@ export const DataList = (props: DataListProps) => {
 	return (
 		<WrapItem>
 			<div className={'dataTable'}>
-				<Text fontSize={'4xl'}>{props.title}</Text>
+				<Text fontSize={'3xl'}>{props.title}</Text>
 				<ConfirmDialog
 					onConfirm={() => {
 						props.deleteEntry(awaitingDelete);
@@ -139,7 +141,7 @@ export const DataList = (props: DataListProps) => {
 							</Th>
 						</Tr>
 					</Thead>
-					{props.data[0] === undefined && <TableCaption>There was no data found</TableCaption>}
+					{props.data[0] === undefined && <TableCaption>No data found</TableCaption>}
 					<Tbody>
 						{props.data.map((d, i) => (
 							<Tr key={`${i}-${d.id}`}>
@@ -161,6 +163,11 @@ export const DataList = (props: DataListProps) => {
 						))}
 					</Tbody>
 				</Table>
+				{props.data[0] === undefined && (
+					<Center>
+						<Spinner size='lg' />
+					</Center>
+				)}
 			</div>
 		</WrapItem>
 	);
