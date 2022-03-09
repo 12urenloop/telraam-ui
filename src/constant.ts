@@ -1,6 +1,7 @@
-export const BATON_PLACEHOLDER: BaseEntry = {
+export const BATON_PLACEHOLDER: Baton = {
 	id: 0,
 	name: '',
+	mac: '',
 };
 
 export const TEAM_PLACEHOLDER: Team = {

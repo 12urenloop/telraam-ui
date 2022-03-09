@@ -9,7 +9,7 @@ export const Batons = () => {
 	const batonContext = useContext(BatonContext);
 	const fetcher = useFetchData('batons');
 	const fetchBatons = async () => {
-		const batons = await fetcher.fetch<BaseEntry[]>('baton', true);
+		const batons = await fetcher.fetch<Baton[]>('baton', true);
 		batonContext.setList(batons);
 	};
 	const addBaton = async (values: Record<string, string>) => {

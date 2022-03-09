@@ -4,6 +4,10 @@ interface BaseEntry {
 	name: string;
 }
 
+interface Baton extends BaseEntry {
+	mac: string;
+}
+
 interface Team extends BaseEntry {
 	batonId: number;
 }
