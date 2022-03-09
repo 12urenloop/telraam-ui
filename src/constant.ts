@@ -13,4 +13,5 @@ export const STATION_PLACEHOLDER: Station = {
 	id: 0,
 	name: '',
 	isBroken: false,
+	url: '',
 };

@@ -10,6 +10,7 @@ interface Team extends BaseEntry {
 
 interface Station extends BaseEntry {
 	isBroken: boolean;
+	url: string;
 }
 
 interface basicContext<T> {
