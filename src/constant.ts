@@ -13,7 +13,7 @@ export const TEAM_PLACEHOLDER: Team = {
 export const STATION_PLACEHOLDER: Station = {
 	id: 0,
 	name: '',
+	distanceFromStart: 0,
 	isBroken: false,
 	url: '',
-	distance_from_start: 0,
 };

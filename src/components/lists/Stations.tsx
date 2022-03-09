@@ -11,6 +11,7 @@ export const Stations: FC = () => {
 	const fetchStations = async () => {
 		// TODO: Rename to station when endpoint is changed
 		let stations = await fetcher.fetch<Station[]>('beacon', true);
+		console.log(stations);
 		stations = stations.sort(sortNumericId);
 		stationCtx.setList(stations);
 	};

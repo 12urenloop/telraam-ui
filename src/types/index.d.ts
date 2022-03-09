@@ -15,7 +15,7 @@ interface Team extends BaseEntry {
 interface Station extends BaseEntry {
 	isBroken: boolean;
 	url: string;
-	distance_from_start: number;
+	distanceFromStart: number;
 }
 
 interface basicContext<T> {
