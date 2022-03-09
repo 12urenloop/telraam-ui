@@ -15,4 +15,5 @@ export const STATION_PLACEHOLDER: Station = {
 	name: '',
 	isBroken: false,
 	url: '',
+	distance_from_start: 0,
 };
