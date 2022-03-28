@@ -9,21 +9,20 @@ export const Stations: FC = () => {
 	const stationCtx = useContext(StationContext);
 	const fetcher = useFetchData('stations');
 	const fetchStations = async () => {
-		// TODO: Rename to station when endpoint is changed
-		let stations = await fetcher.fetch<Station[]>('beacon', true);
+		let stations = await fetcher.fetch<Station[]>('stations', true);
 		stations = stations.sort(sortNumericId);
 		stationCtx.setList(stations);
 	};
 	const addStation = async (values: Record<string, string>) => {
-		await addData(`beacon`, parseData(values, STATION_PLACEHOLDER));
+		await addData(`station`, parseData(values, STATION_PLACEHOLDER));
 		await fetchStations();
 	};
 	const deleteStation = async (id: number) => {
-		await deleteData(`beacon/${id}`);
+		await deleteData(`station/${id}`);
 		await fetchStations();
 	};
 	const updateStation = async (id: number, values: Record<string, string>) => {
-		await updateData(`beacon/${id}`, parseData(values, STATION_PLACEHOLDER));
+		await updateData(`station/${id}`, parseData(values, STATION_PLACEHOLDER));
 		await fetchStations();
 	};
 
