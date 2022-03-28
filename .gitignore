@@ -4,6 +4,9 @@ dist-ssr
 *.local
 .env
 
+# Emacs
+*.~undo-tree~
+
 
 # Created by https://www.toptal.com/developers/gitignore/api/react,jetbrains,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=react,jetbrains,visualstudiocode
