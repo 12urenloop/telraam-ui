@@ -76,7 +76,7 @@ export const EditModal = () => {
 							{i.options ? (
 								<Select placeholder={`Select ${i.name}`} name={i.name} value={String(i.value)} onChange={updateValue}>
 									{i.options.map(io => (
-										<option value={io.value}>{io.name}</option>
+										<option value={String(io.value)}>{io.name}</option>
 									))}
 								</Select>
 							) : (

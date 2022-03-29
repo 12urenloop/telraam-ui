@@ -24,8 +24,8 @@ export const useFetchData = (module: ModuleType) => {
 			}
 			setIsFetching(true);
 			setHasErrored(false);
-			const data = await fetchData<BaseEntry[]>(url);
-			if (shouldSort) {
+			const data = await fetchData<T>(url);
+			if (shouldSort && Array.isArray(data)) {
 				if (typeof shouldSort === 'function') {
 					data.sort(shouldSort);
 				} else {
