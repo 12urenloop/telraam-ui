@@ -6,4 +6,4 @@ updates:
       interval: 'daily'
     allow:
       - dependency-type: 'direct'
-    target-branch: 'master'
+    target-branch: 'main'
