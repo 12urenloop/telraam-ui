@@ -34,6 +34,8 @@ export const Teams = () => {
 	};
 	useEffect(() => {
 		fetchTeams().then();
+		const interval = setInterval(() => fetchTeams(), Number(import.meta.env.VITE_FETCH_INTERVAL));
+		return () => clearInterval(interval);
 	}, []);
 	return (
 		<DataList

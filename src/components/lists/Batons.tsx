@@ -27,7 +27,7 @@ export const Batons = () => {
 
 	useEffect(() => {
 		fetchBatons();
-		const interval = setInterval(() => fetchBatons(), 1000);
+		const interval = setInterval(() => fetchBatons(), Number(import.meta.env.VITE_FETCH_INTERVAL));
 		return () => clearInterval(interval);
 	}, []);
 

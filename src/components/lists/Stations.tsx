@@ -9,7 +9,7 @@ export const Stations: FC = () => {
 	const stationCtx = useContext(StationContext);
 	const fetcher = useFetchData('stations');
 	const fetchStations = async () => {
-		let stations = await fetcher.fetch<Station[]>('stations', true);
+		let stations = await fetcher.fetch<Station[]>('station', true);
 		stations = stations.sort(sortNumericId);
 		stationCtx.setList(stations);
 	};
@@ -28,7 +28,7 @@ export const Stations: FC = () => {
 
 	useEffect(() => {
 		fetchStations().then();
-		const interval = setInterval(() => fetchStations(), 1000);
+		const interval = setInterval(() => fetchStations(), Number(import.meta.env.VITE_FETCH_INTERVAL));
 		return () => clearInterval(interval);
 	}, []);
 
