@@ -17,3 +17,9 @@ export const STATION_PLACEHOLDER: Station = {
 	isBroken: false,
 	url: '',
 };
+
+export const SWITCHOVER_PLACEHOLDER: SwitchOver = {
+	id: 0,
+	newLapSource: 0,
+	timestamp: Date.now(),
+};

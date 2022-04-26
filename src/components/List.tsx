@@ -99,7 +99,7 @@ export const DataList = (props: DataListProps) => {
 			}
 			_inputs.push({
 				name: k,
-				value: v,
+				value: typeof v === 'number' ? String(v) : v,
 				disabled: k == 'id',
 				options: selectOpt,
 			});
@@ -145,7 +145,7 @@ export const DataList = (props: DataListProps) => {
 					<Tbody>
 						{props.data.map((d, i) => (
 							<Tr key={`${i}-${d.id}`}>
-								{(Object.keys(d) as (keyof BaseEntry)[]).map(dataKey => (
+								{(Object.keys(d) as (keyof { id: number })[]).map(dataKey => (
 									<Td key={`${props.title}-data-${dataKey}`}>{String(d[dataKey])}</Td>
 								))}
 								<Td>

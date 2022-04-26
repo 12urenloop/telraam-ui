@@ -18,6 +18,12 @@ interface Station extends BaseEntry {
 	distanceFromStart: number;
 }
 
+interface SwitchOver {
+	id: number;
+	newLapSource: number;
+	timestamp: number;
+}
+
 interface basicContext<T> {
 	list: T[];
 	setList: (list: T[]) => void;
@@ -34,7 +40,7 @@ type BaseEntrySortFunc = (a: BaseEntry, b: BaseEntry) => number;
 // region Component Types
 interface DataListProps {
 	title: string;
-	data: BaseEntry[];
+	data: { id: number }[];
 	selectElem?: {
 		key: string;
 		getter: () => DataListSelectEntry[];
@@ -90,7 +96,7 @@ interface ModalContextProps {
 // endregion
 
 // region General Context
-type ModuleType = 'teams' | 'stations' | 'batons';
+type ModuleType = 'teams' | 'stations' | 'batons' | 'lapsourceswitchover';
 
 interface GeneralContext {
 	enabledModules: Record<ModuleType, boolean>;

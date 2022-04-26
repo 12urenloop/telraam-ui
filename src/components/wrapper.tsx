@@ -7,11 +7,13 @@ import { Alert, AlertDescription, AlertIcon, Button, ButtonGroup, Center, Wrap }
 
 import '../styles/wrapper.scss';
 import { GeneralContext } from '../context/general.context';
+import { LapSourceSwitch } from './lists/LapSourceSwitch';
 
 const ModuleComponents: Record<ModuleType, JSX.Element> = {
 	batons: <Batons />,
 	teams: <Teams />,
 	stations: <Stations />,
+	lapsourceswitchover: <LapSourceSwitch />,
 };
 
 export const Wrapper = () => {

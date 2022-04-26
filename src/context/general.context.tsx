@@ -4,6 +4,7 @@ const defaultModule: Record<ModuleType, boolean> = {
 	batons: true,
 	teams: true,
 	stations: true,
+	lapsourceswitchover: true,
 };
 
 export const GeneralContext = createContext<GeneralContext>({

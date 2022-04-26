@@ -6,6 +6,7 @@ import { BatonProvider } from '../context/batons.context';
 import { TeamProvider } from '../context/teams.context';
 import { StationProvider } from '../context/stations.context';
 import { GeneralProvider } from '../context/general.context';
+import { SwitchProvider } from '../context/lapswitch.context';
 
 export const AppProviders: FC = ({ children }) => {
 	return (
@@ -14,7 +15,9 @@ export const AppProviders: FC = ({ children }) => {
 				<ModalProvider>
 					<BatonProvider>
 						<TeamProvider>
-							<StationProvider>{children}</StationProvider>
+							<StationProvider>
+								<SwitchProvider>{children}</SwitchProvider>
+							</StationProvider>
 						</TeamProvider>
 					</BatonProvider>
 				</ModalProvider>
