@@ -7,8 +7,9 @@ import { TeamProvider } from '../context/teams.context';
 import { StationProvider } from '../context/stations.context';
 import { GeneralProvider } from '../context/general.context';
 import { SwitchProvider } from '../context/lapswitch.context';
+import { ToastContainer } from '../util';
 
-export const AppProviders: FC = ({ children }) => {
+export const AppProviders: FC<React.PropsWithChildren<unknown>> = ({ children }) => {
 	return (
 		<ChakraProvider theme={theme}>
 			<GeneralProvider>
@@ -16,7 +17,10 @@ export const AppProviders: FC = ({ children }) => {
 					<BatonProvider>
 						<TeamProvider>
 							<StationProvider>
-								<SwitchProvider>{children}</SwitchProvider>
+								<SwitchProvider>
+									{children}
+									<ToastContainer />
+								</SwitchProvider>
 							</StationProvider>
 						</TeamProvider>
 					</BatonProvider>

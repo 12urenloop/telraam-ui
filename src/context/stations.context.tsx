@@ -7,7 +7,7 @@ export const StationContext = createContext<StationContextProps>({
 	},
 });
 
-export const StationProvider: React.FC = ({ children }) => {
+export const StationProvider: React.FC<React.PropsWithChildren<unknown>> = ({ children }) => {
 	const [list, setStateList] = useState<Station[]>([]);
 	const setList = (stationList: Station[]) => {
 		setStateList(stationList);

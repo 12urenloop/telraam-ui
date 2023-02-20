@@ -7,7 +7,7 @@ export const BatonContext = createContext<BaseEntryContextProps>({
 	},
 });
 
-export const BatonProvider: React.FC = ({ children }) => {
+export const BatonProvider: React.FC<React.PropsWithChildren<unknown>> = ({ children }) => {
 	const [list, setStateList] = useState<BaseEntry[]>([]);
 	const setList = (batonList: BaseEntry[]) => {
 		setStateList(batonList);

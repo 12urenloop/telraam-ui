@@ -7,7 +7,7 @@ export const SwitchContext = createContext<basicContext<SwitchOver>>({
 	},
 });
 
-export const SwitchProvider: React.FC = ({ children }) => {
+export const SwitchProvider: React.FC<React.PropsWithChildren<unknown>> = ({ children }) => {
 	const [list, setStateList] = useState<SwitchOver[]>([]);
 	const setList = (switchList: SwitchOver[]) => {
 		setStateList(switchList);

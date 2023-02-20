@@ -1,6 +1,5 @@
-import { createStandaloneToast } from '@chakra-ui/react';
-
-const toast = createStandaloneToast();
+import { createStandaloneToast } from '@chakra-ui/toast';
+export const { ToastContainer, toast } = createStandaloneToast();
 
 export const sortNumericId = (a: Object & { id: number }, b: Object & { id: number }) => a.id - b.id;
 

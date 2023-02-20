@@ -16,11 +16,13 @@ import {
 } from '@chakra-ui/react';
 import { ModalContext } from '../context/modal.context';
 
-const InputWrap: FC<{
-	name: string;
-	value: number | string | boolean;
-	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-}> = ({ value, ...props }) => {
+const InputWrap: FC<
+	React.PropsWithChildren<{
+		name: string;
+		value: number | string | boolean;
+		onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+	}>
+> = ({ value, ...props }) => {
 	if (typeof value === 'boolean') {
 		return <Switch {...props} isChecked={value} />;
 	}

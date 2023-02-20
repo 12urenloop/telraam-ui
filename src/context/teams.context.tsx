@@ -7,7 +7,7 @@ export const TeamContext = createContext<TeamContextProps>({
 	},
 });
 
-export const TeamProvider: React.FC = ({ children }) => {
+export const TeamProvider: React.FC<React.PropsWithChildren<unknown>> = ({ children }) => {
 	const [list, setStateList] = useState<Team[]>([]);
 	const setList = (batonList: Team[]) => {
 		setStateList(batonList);

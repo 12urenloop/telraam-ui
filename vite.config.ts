@@ -9,7 +9,6 @@ export default defineConfig({
 		eslintPlugin({
 			cache: true,
 			fix: true,
-			throwOnWarning: false,
 		}),
 	],
 });

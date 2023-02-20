@@ -13,7 +13,7 @@ export const useFetchData = (module: ModuleType) => {
 	 * @param shouldSort Whether to sort the data by id, its also possible to pass a custom sort function
 	 */
 	const fetch = useCallback(
-		async <T = BaseEntry>(url: string, shouldSort: BaseEntrySortFunc | boolean = false): Promise<T> => {
+		async <T extends any[] = BaseEntry[]>(url: string, shouldSort: BaseEntrySortFunc | boolean = false): Promise<T> => {
 			if (isFetching && !hasErrored) {
 				toast({
 					title: `Couldn't fetch ${module}`,
@@ -24,16 +24,29 @@ export const useFetchData = (module: ModuleType) => {
 			}
 			setIsFetching(true);
 			setHasErrored(false);
-			const data = await fetchData<T>(url);
-			if (shouldSort && Array.isArray(data)) {
-				if (typeof shouldSort === 'function') {
-					data.sort(shouldSort);
-				} else {
-					data.sort(sortNumericId);
+			try {
+				const data = await fetchData<T>(url);
+				if (shouldSort && Array.isArray(data)) {
+					if (typeof shouldSort === 'function') {
+						data.sort(shouldSort);
+					} else {
+						data.sort(sortNumericId);
+					}
 				}
+				return data;
+			} catch (e) {
+				console.error(e);
+				toast({
+					title: 'An fetch(GET) error occurred',
+					description: `${(e as Error)?.message ?? 'Unknown error'}, check the console for more info`,
+					status: 'error',
+					duration: 9000,
+					isClosable: true,
+				});
+				return [] as unknown as T;
+			} finally {
+				setIsFetching(false);
 			}
-			setIsFetching(false);
-			return data;
 		},
 		[]
 	);

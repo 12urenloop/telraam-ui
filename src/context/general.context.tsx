@@ -14,7 +14,7 @@ export const GeneralContext = createContext<GeneralContext>({
 	},
 });
 
-export const GeneralProvider: React.FC = ({ children }) => {
+export const GeneralProvider: React.FC<React.PropsWithChildren<unknown>> = ({ children }) => {
 	const [enabledModules, setEnabledModules] = useState<Record<ModuleType, boolean>>(defaultModule);
 	const toggleModule = (module: ModuleType) => {
 		setEnabledModules({

@@ -5,7 +5,7 @@ import { DataList } from '../List';
 import { StationContext } from '../../context/stations.context';
 import { useFetchData } from '../../hooks/useFetchData';
 
-export const Stations: FC = () => {
+export const Stations: FC<React.PropsWithChildren<unknown>> = () => {
 	const stationCtx = useContext(StationContext);
 	const fetcher = useFetchData('stations');
 	const fetchStations = async () => {

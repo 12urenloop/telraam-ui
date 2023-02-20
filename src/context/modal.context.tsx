@@ -24,7 +24,7 @@ export const ModalContext = createContext<ModalContextProps>({
 	},
 });
 
-export const ModalProvider: React.FC = ({ children }) => {
+export const ModalProvider: React.FC<React.PropsWithChildren<unknown>> = ({ children }) => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [info, setInfoState] = useState<ModalInfo>({
 		inputs: [],
